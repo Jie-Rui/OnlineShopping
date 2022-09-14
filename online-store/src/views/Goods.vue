@@ -10,12 +10,8 @@
 		</el-breadcrumb>
 
 		<!-- 分类tab -->
-		<div></div>
-		<el-tabs
-			v-model="activeName"
-			type="border-card"
-			@tab-click="handleClick"
-		>
+
+		<el-tabs v-model="activeName" type="card" @tab-click="handleClick">
 			<el-tab-pane
 				v-for="item in categoryList"
 				:label="item.category_name"
@@ -24,7 +20,7 @@
 			></el-tab-pane>
 		</el-tabs>
 
-		<div id="main">
+		<div class="main">
 			<div class="list">
 				<MyList :list="product" v-if="product.length > 0"></MyList>
 				<div v-else class="none-product">
@@ -86,7 +82,7 @@ export default {
 		},
 		handleClick(index) {
 			// console.log(index.index);
-			console.log("tabindex", index.index);
+			// console.log("tabindex", index.index);
 			if (index.index == 0) {
 				this.categoryID = [];
 			}
@@ -137,7 +133,7 @@ export default {
 		},
 		// 返回顶部
 		backtop() {
-			const timer = setInterval(function() {
+			const timer = setInterval(function () {
 				const top =
 					document.documentElement.scrollTop ||
 					document.body.scrollTop;
@@ -156,18 +152,40 @@ export default {
 		// 	console.log("val", val);
 		// },
 
-		categoryID: function() {
+		categoryID: function () {
 			this.getData();
-			console.log("this.product", this.product);
-			console.log("this.total", this.total);
+			// console.log("this.product", this.product);
+			// console.log("this.total", this.total);
 		},
 	},
 };
 </script>
 
 <style scoped>
+.goods .main {
+	background-color: #f5f5f5;
+}
 .goods .el-breadcrumb {
-	height: 50px;
+	height: 30px;
 	background-color: white;
+	width: 1225px;
+	line-height: 30px;
+	font-size: 16px;
+	margin: 10px auto;
+}
+.el-tabs {
+	width: 1225px;
+	height: 40px;
+	line-height: 40px;
+	margin: 0 auto;
+	text-align: center;
+}
+.list {
+	overflow: auto;
+	padding-top: 14.5px;
+	margin-left: 93px;
+}
+.el-pagination{
+	text-align: center;
 }
 </style>
