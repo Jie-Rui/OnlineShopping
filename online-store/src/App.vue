@@ -209,7 +209,7 @@ export default {
 }
 #app .el-main {
 	min-height: 300px;
-	padding: 20px 0;
+	padding: 0;
 }
 #app .el-footer {
 	padding: 0;
