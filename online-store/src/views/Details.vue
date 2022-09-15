@@ -214,15 +214,10 @@ export default {
 /* 主体左侧轮播图 */
 .lbt {
 	width: 560px;
-	height: 100%;
+	height: 560px;
 	float: left;
 }
-.lbt,.el-carousel,.el-carousel__indicator,.el-carousel__button {
-	background-color: rgba(163, 163, 163, 0.8);
-}
-/* .el-carousel__indicator--horizontal {
-	background-color: rgba(163, 163, 163, 0.8);
-} */
+
 /* 主体右侧信息 */
 .info {
 	width: 640px;
