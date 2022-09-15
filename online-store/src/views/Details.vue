@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div id="details">
 		<!-- 头部模块 -->
 		<div class="title">
 			<p>{{ productInfo.product_name }}</p>
@@ -136,6 +136,8 @@ export default {
 		},
 		// 加购物车
 		addCar() {
+			// console.log('this.$store.getters.getUser.user_id',this.$store.getters.getUser.user_id)
+			var id = window.localStorage.user_id;
 			// 判断是否登录,没有登录则显示登录组件
 			if (!this.$store.getters.getUser) {
 				this.$store.dispatch("setShowLogin", true);
@@ -148,12 +150,13 @@ export default {
 				return;
 			}
 			this.$http
-				.post("user/shoppingCart/addShoppingCart", {
-					user_id: this.$store.getters.getUser.user_id,
+				.post("/user/shoppingCart/addShoppingCart", {
+					user_id: id,
 					product_id: this.productID,
 				})
 				.then((res) => {
-                    console.log(res);
+					// console.log(res);
+					console.log("res", res);
 					// switch (res.data.code) {
 					// 	case "001":
 					// 		// 新加入购物车成功
@@ -178,7 +181,8 @@ export default {
 				})
 				.catch((err) => {
 					// return Promise.reject(err);
-                    console.log(err);
+					// console.log(err);
+					console.log("err", err);
 				});
 		},
 	},
@@ -213,6 +217,12 @@ export default {
 	height: 100%;
 	float: left;
 }
+.lbt,.el-carousel,.el-carousel__indicator,.el-carousel__button {
+	background-color: rgba(163, 163, 163, 0.8);
+}
+/* .el-carousel__indicator--horizontal {
+	background-color: rgba(163, 163, 163, 0.8);
+} */
 /* 主体右侧信息 */
 .info {
 	width: 640px;
@@ -291,5 +301,7 @@ img {
 .policy ul li {
 	float: left;
 	list-style: none;
+	color: #b0b0b0;
+	margin-right: 10px;
 }
 </style>
