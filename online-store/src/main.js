@@ -20,7 +20,7 @@ Vue.component(MyList.name ,MyList);
 import MyLogin from './components/MyLogin';
 Vue.component(MyLogin.name ,MyLogin);
 import MyRegister from './components/MyRegister';
-Vue.component(MyRegister);
+Vue.component(MyRegister.name ,MyRegister);
 
 // 定义全局时间过滤器
 Vue.filter('dateFormat',function (originVal){

@@ -3,9 +3,9 @@
 <template>
 	<div id="myLogin">
 		<el-dialog
-			title="登录"
+			title="用户登录"
 			:visible.sync="isLogin"
-			width="300px"
+			width="30%"
 			center
 			:before-close="handleClose"
 		>
@@ -35,7 +35,7 @@
 					<el-button
 						size="medium"
 						type="primary"
-            style="margin-right: 100px"
+            style="margin: 0 80px 0 100px"
 						@click="Login"
 						>登录</el-button
 					>
@@ -88,7 +88,7 @@ export default {
 				name: "",
 				pass: "",
 			},
-			// 用户信息校验规则,validator(校验方法),trigger(触发方式),blur为在组件 Input 失去焦点时触发
+			// 用户信息校验规则,validator(校验方法)
 			rules: {
 				name: [{ validator: validateName, trigger: "blur" }],
 				pass: [{ validator: validatePass, trigger: "blur" }],
