@@ -1,7 +1,7 @@
 // 用户注册组件
 <template>
   <div id="register">
-    <el-dialog title="注册" width="300px" center :visible.sync="isRegister">
+    <el-dialog title="注册" width="30%" center :visible.sync="isRegister">
       <el-form
         :model="RegisterUser"
         :rules="rules"
@@ -33,7 +33,8 @@
           ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button size="medium" type="primary" @click="Register" style="width:100%;">注册</el-button>
+          <el-button size="medium" type="primary" @click="Register" style="margin: 0 60px 0 100px;">注册</el-button>
+          <el-button @click="resetForm('ruleForm')">重置</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
