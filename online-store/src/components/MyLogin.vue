@@ -35,10 +35,13 @@
 					<el-button
 						size="medium"
 						type="primary"
+            style="margin-right: 100px"
 						@click="Login"
-						style="width: 100%"
 						>登录</el-button
 					>
+          <el-button
+          size="medium"
+          @click="resetForm('ruleForm')">重置</el-button>
 				</el-form-item>
 			</el-form>
 		</el-dialog>
@@ -105,6 +108,9 @@ export default {
 		},
 	},
 	methods: {
+    resetForm(formName) {
+        this.$refs[formName].resetFields();
+      },
 		handleClose(done) {
 			this.$confirm("确认关闭？")
 				.then((_) => {
