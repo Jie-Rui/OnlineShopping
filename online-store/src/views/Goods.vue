@@ -148,10 +148,6 @@ export default {
 		},
 	},
 	watch: {
-		// activeName: (val) => {
-		// 	console.log("val", val);
-		// },
-
 		categoryID: function () {
 			this.getData();
 			// console.log("this.product", this.product);
