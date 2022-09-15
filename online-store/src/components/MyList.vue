@@ -1,7 +1,7 @@
 // 列表组件，用于首页、全部商品页面的商品列表
 
 <template>
-  <div class="myList">
+  <div id="myList" class="myList">
     <ul>
       <li v-for="item in list" :key="item.product_id">
         <el-popover placement="top">
@@ -35,7 +35,7 @@
 </template>
 <script>
 export default {
-  name: 'MyList',
+  name: "MyList",
   // list为父组件传过来的商品列表
   // isMore为是否显示“浏览更多”
   props: ["list", "isMore", "isDelete"],
@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     deleteCollect(product_id) {
-      this.$axios
+      this.$http
         .post("/user/collect/deleteCollect/", {
           user_id: this.$store.getters.getUser.user_id,
           product_id: product_id
@@ -91,16 +91,7 @@ export default {
 };
 </script>
 <style scoped>
-.myList a {
-  text-decoration: none;
-}
-.myList ul {
-  height: 615px;
-  margin: 0;
-  padding: 0;
-}
 .myList ul li {
-  list-style: none;
   z-index: 1;
   float: left;
   width: 234px;

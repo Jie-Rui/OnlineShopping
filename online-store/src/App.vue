@@ -1,3 +1,5 @@
+// 项目根组件
+
 <template>
   <div id="app" name="app">
     <el-container>
@@ -68,7 +70,7 @@
       <!-- 登录模块 -->
       <MyLogin></MyLogin>
       <!-- 注册模块 -->
-      <!-- <MyRegister :register="register" @fromChild="isRegister"></MyRegister> -->
+      <MyRegister :register="register" @fromChild="isRegister"></MyRegister>
 
       <!-- 主要区域容器 -->
       <el-main>
@@ -81,22 +83,21 @@
       <!-- 底栏容器 -->
       <el-footer>
         <div class="footer">
-          <div class="content">
+          <div class="ng-promise-box">
+            <div class="ng-promise">
               <p class="text">
                 <a class="icon1" href="javascript:;">7天无理由退换货</a>
                 <a class="icon2" href="javascript:;">满99元全场免邮</a>
                 <a class="icon3" style="margin-right: 0" href="javascript:;">100%品质保证</a>
               </p>
+            </div>
           </div>
-					<div class="source">
-						<a
-							href="https://github.com/Jie-Rui/Shop-Store/tree/main/vue-store"
-							target="_blank"
-						>
-							<div class="source-img"></div>
-						</a>
-					</div>
-					<div class="help">
+          <div class="source">
+            <a href="https://github.com/Jie-Rui/Shop-Store/tree/main/vue-store" target="_blank">
+              <div class="source-img"></div>
+            </a>
+          </div>
+          <div class="help">
             <p>
               <router-link to="/">首页</router-link>
               <span>|</span>
@@ -104,12 +105,13 @@
               <span>|</span>
               <router-link to="/about">关于我们</router-link>
             </p>
-            <p class="copyright">商城版权所有 &copy; 2021-2022</p>
+            <p class="copyright">商城版权所有 &copy; 2012-2021</p>
           </div>
-				</div>
-			</el-footer>
-		</el-container>
-	</div>
+        </div>
+      </el-footer>
+      <!-- 底栏容器END -->
+    </el-container>
+  </div>
 </template>
 
 <script>
@@ -146,8 +148,8 @@ export default {
         this.setShoppingCart([]);
       } else {
         // 用户已经登录,获取该用户的购物车信息
-        this.$axios
-          .post("/api/user/shoppingCart/getShoppingCart", {
+        this.$http
+          .post("/user/shoppingCart/getShoppingCart/", {
             user_id: val.user_id
           })
           .then(res => {
@@ -196,154 +198,157 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-/* 全局样式css */
+<style>
+/* 全局CSS */
 * {
-	padding: 0;
-	margin: 0;
-	border: 0;
-	list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  list-style: none;
 }
 #app .el-header {
-	padding: 0;
+  padding: 0;
 }
 #app .el-main {
-	min-height: 300px;
-	padding: 0;
+  min-height: 300px;
+  padding: 20px 0;
 }
 #app .el-footer {
-	padding: 0;
+  padding: 0;
 }
 a,
 a:hover {
-	text-decoration: none;
+  text-decoration: none;
 }
 
-/* 顶部 nav 区域 */
+/* 顶部导航栏CSS */
 .top-bar {
-	height: 40px;
-	background-color: #3d3d3d;
-	margin-bottom: 20px;
-	.nav {
-		width: 1225px;
-		margin: 0 auto;
-		ul {
-			float: right;
-		}
-		li {
-			float: left;
-			height: 40px;
-			color: #b0b0b0;
-			font-size: 14px;
-			text-align: center;
-			line-height: 40px;
-			margin-left: 20px;
-			.el-button {
-				color: #b0b0b0;
-			}
-			.el-button:hover {
-				color: #fff;
-			}
-			a {
-				color: #b0b0b0;
-			}
-			a:hover {
-				color: #fff;
-			}
-		}
-		.sep {
-			color: #b0b0b0;
-			font-size: 12px;
-			margin: 0 5px;
-		}
-		.shopCart {
-			width: 120px;
-			background-color: #424242;
-		}
-		.shopCart:hover {
-			background-color: #fff;
-		}
-		.shopCart:hover a {
-			color: #ff6700;
-		}
-		.shopCart-full {
-			width: 120px;
-			background-color: #ff6700;
-		}
-		.shopCart-full a {
-			color: #fff;
-		}
-	}
+  height: 40px;
+  background-color: #3d3d3d;
+  margin-bottom: 20px;
+}
+.top-bar .nav {
+  width: 1225px;
+  margin: 0 auto;
+}
+.top-bar .nav ul {
+  float: right;
+}
+.top-bar .nav li {
+  float: left;
+  height: 40px;
+  color: #b0b0b0;
+  font-size: 14px;
+  text-align: center;
+  line-height: 40px;
+  margin-left: 20px;
+}
+.top-bar .nav .sep {
+  color: #b0b0b0;
+  font-size: 12px;
+  margin: 0 5px;
+}
+.top-bar .nav li .el-button {
+  color: #b0b0b0;
+}
+.top-bar.nav .el-button:hover {
+  color: #fff;
+}
+.top-bar .nav li a {
+  color: #b0b0b0;
+}
+.top-bar .nav a:hover {
+  color: #fff;
+}
+.top-bar .nav .shopCart {
+  width: 120px;
+  background: #424242;
+}
+.top-bar .nav .shopCart:hover {
+  background: #fff;
+}
+.top-bar .nav .shopCart:hover a {
+  color: #ff6700;
+}
+.top-bar .nav .shopCart-full {
+  width: 120px;
+  background: #ff6700;
+}
+.top-bar .nav .shopCart-full a {
+  color: white;
 }
 
-/* 顶部 header 区域 */
-.el-header {
-	.el-menu {
-		max-width: 1225px;
-		margin: 0 auto;
-	}
-	.logo {
-		width: 189px;
-		height: 60px;
-		float: left;
-		margin-right: 100px;
-	}
-	.search {
-		width: 300px;
-		margin-top: 10px;
-		float: right;
-	}
+/* 顶栏容器CSS */
+.el-header .el-menu {
+  max-width: 1225px;
+  margin: 0 auto;
+}
+.el-header .logo {
+  height: 60px;
+  width: 189px;
+  float: left;
+  margin-right: 100px;
+}
+.el-header .search {
+  margin-top: 10px;
+  width: 300px;
+  float: right;
 }
 
-/* 底部 footer 区域 */
+/* 底栏容器CSS */
 .footer {
-	width: 100%;
-	text-align: center;
-	background-color: #2f2f2f;
-	padding-bottom: 20px;
-	.content {
-		margin: 0 auto;
-		border-bottom: 1px solid #3d3d3d;
-		line-height: 145px;
-		a {
-			display: inline-block;
-			height: 40px;
-			margin-right: 210px;
-			padding-left: 44px;
-			line-height: 40px;
-			color: #fff;
-			font-size: 20px;
-			text-decoration: none;
-			background: url("./assets/images/us-icon.png") no-repeat left 0;
-		}
-	}
-	.source {
-		height: 50px;
-		line-height: 50px;
-		margin-top: 20px;
-		.source-img {
-			width: 50px;
-			height: 50px;
-			margin: 0 auto;
-			background: url("./assets/images/github.png") no-repeat;
-		}
-	}
-	.help {
-		text-align: center;
-		color: #888888;
-		p {
-			margin: 20px 0 16px 0;
-			a {
-				text-decoration: none;
-				color: #888888;
-			}
-			a:hover {
-				color: #fff;
-			}
-			span {
-				padding: 0 22px;
-			}
-		}
-	}
+  width: 100%;
+  text-align: center;
+  background: #2f2f2f;
+  padding-bottom: 20px;
+}
+.footer .ng-promise-box {
+  border-bottom: 1px solid #3d3d3d;
+  line-height: 145px;
+}
+.footer .ng-promise-box {
+  margin: 0 auto;
+  border-bottom: 1px solid #3d3d3d;
+  line-height: 145px;
+}
+.footer .ng-promise-box .ng-promise p a {
+  color: #fff;
+  font-size: 20px;
+  margin-right: 210px;
+  padding-left: 44px;
+  height: 40px;
+  display: inline-block;
+  line-height: 40px;
+  text-decoration: none;
+  background: url("./assets/images/us-icon.png") no-repeat left 0;
+}
+.footer .source {
+  height: 50px;
+  line-height: 50px;
+  margin-top: 20px;
+}
+.footer .source .source-img {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  background: url("./assets/images/github.png") no-repeat;
+}
+.footer .help {
+  text-align: center;
+  color: #888888;
+}
+.footer .help p {
+  margin: 20px 0 16px 0;
+}
+
+.footer .help p a {
+  color: #888888;
+  text-decoration: none;
+}
+.footer .help p a:hover {
+  color: #fff;
+}
+.footer .help p span {
+  padding: 0 22px;
 }
 </style>

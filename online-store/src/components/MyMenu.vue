@@ -33,21 +33,16 @@ export default {
   },
   watch: {
     // 向父组件传过去当前要显示的商品分类，从而更新商品列表
-    activeClass(val) {
+    activeClass: function(val) {
       this.$emit("fromChild", val);
     }
   }
 };
 </script>
-<style lang="less" scoped>
+<style scoped>
 #myMenu li {
-  list-style: none;
   float: left;
   margin-left: 30px;
-  a {
-    text-decoration: none;
-    color: #424242;
-  }
 }
 
 #myMenu a:hover {
