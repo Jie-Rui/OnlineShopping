@@ -150,7 +150,7 @@ export default {
             user_id: val.user_id
           })
           .then(res => {
-            console.log(res);
+            // console.log(res);
             if (res.data.code === '001') {
               // 001 为成功, 更新vuex购物车状态
               this.setShoppingCart(res.data.shoppingCartData);
