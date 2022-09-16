@@ -176,7 +176,7 @@ export default {
 	created() {
 		// 获取轮播图数据
 		this.$http
-			.post("/resources/carousel/", {})
+			.post("/api/resources/carousel/", {})
 			.then((res) => {
 				this.carousel = res.data.carousel;
 			})
@@ -191,12 +191,12 @@ export default {
 		this.getPromo(
 			["电视机", "空调", "洗衣机"],
 			"applianceList",
-			"/product/getHotProduct/"
+			"/api/product/getHotProduct/"
 		);
 		this.getPromo(
 			["保护套", "保护膜", "充电器", "充电宝"],
 			"accessoryList",
-			"/product/getHotProduct/"
+			"/api/product/getHotProduct/"
 		);
 	},
 	methods: {
@@ -210,7 +210,7 @@ export default {
 		},
 		// 获取各类商品数据方法封装
 		getPromo(categoryName, val, api) {
-			api = api != undefined ? api : "/product/getPromoProduct";
+			api = api != undefined ? api : "/api/product/getPromoProduct";
 			this.$http
 				.post(api, {
 					categoryName,

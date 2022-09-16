@@ -149,11 +149,12 @@ export default {
       } else {
         // 用户已经登录,获取该用户的购物车信息
         this.$http
-          .post("/user/shoppingCart/getShoppingCart/", {
+          .post("/api/user/shoppingCart/getShoppingCart/", {
             user_id: val.user_id
           })
           .then(res => {
-            if (res.data.code === "001") {
+            console.log(res);
+            if (res.data.code === '001') {
               // 001 为成功, 更新vuex购物车状态
               this.setShoppingCart(res.data.shoppingCartData);
             } else {

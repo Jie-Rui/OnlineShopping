@@ -55,7 +55,7 @@ export default {
       if (userNameRule.test(value)) {
         //判断数据库中是否已经存在该用户名
         this.$http
-          .post("/users/findUserName", {
+          .post("/api/users/findUserName", {
             userName: this.RegisterUser.name
           })
           .then(res => {
@@ -139,7 +139,7 @@ export default {
       this.$refs["ruleForm"].validate(valid => {
         //如果通过校验开始注册
         if (valid) {
-          this.$axios
+          this.$http
             .post("/api/users/register", {
               userName: this.RegisterUser.name,
               password: this.RegisterUser.pass
@@ -163,7 +163,10 @@ export default {
           return false;
         }
       });
-    }
+    },
+    resetForm(formName) {
+        this.$refs[formName].resetFields();
+      }
   }
 };
 </script>
