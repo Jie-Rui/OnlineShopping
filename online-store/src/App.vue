@@ -38,7 +38,6 @@
           </ul>
         </div>
       </div>
-      <!-- 顶部导航栏END -->
 
       <!-- 顶栏容器 -->
       <el-header>
@@ -65,10 +64,10 @@
           </div>
         </el-menu>
       </el-header>
-      <!-- 顶栏容器END -->
 
       <!-- 登录模块 -->
       <MyLogin></MyLogin>
+
       <!-- 注册模块 -->
       <MyRegister :register="register" @fromChild="isRegister"></MyRegister>
 
@@ -78,7 +77,6 @@
           <router-view></router-view>
         </keep-alive>
       </el-main>
-      <!-- 主要区域容器END -->
 
       <!-- 底栏容器 -->
       <el-footer>
@@ -105,11 +103,10 @@
               <span>|</span>
               <router-link to="/about">关于我们</router-link>
             </p>
-            <p class="copyright">商城版权所有 &copy; 2012-2021</p>
+            <p class="copyright">商城版权所有 &copy; 2021-2022</p>
           </div>
         </div>
       </el-footer>
-      <!-- 底栏容器END -->
     </el-container>
   </div>
 </template>

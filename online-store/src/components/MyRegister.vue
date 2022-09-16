@@ -1,4 +1,5 @@
 // 用户注册组件
+
 <template>
   <div id="register">
     <el-dialog title="注册" width="30%" center :visible.sync="isRegister">
