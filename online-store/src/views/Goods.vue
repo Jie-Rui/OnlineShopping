@@ -62,7 +62,6 @@ export default {
 	},
 	methods: {
 		getCategory() {
-			// console.log("123456");
 			this.$http
 				.post("/api/product/getCategory")
 				.then((result) => {
@@ -81,8 +80,6 @@ export default {
 				});
 		},
 		handleClick(index) {
-			// console.log(index.index);
-			// console.log("tabindex", index.index);
 			if (index.index == 0) {
 				this.categoryID = [];
 			}
@@ -131,6 +128,22 @@ export default {
 			}
 			this.backtop();
 		},
+		// 通过搜索条件向后端请求商品数据
+    getProductBySearch() {
+      this.$http
+        .post("/api/product/getProductBySearch/", {
+          search: this.search,
+          currentPage: this.currentPage,
+          pageSize: this.pageSize
+        })
+        .then(res => {
+          this.product = res.data.Product;
+          this.total = res.data.total;
+        })
+        .catch(err => {
+          return Promise.reject(err);
+        });
+    },
 		// 返回顶部
 		backtop() {
 			const timer = setInterval(function () {
@@ -148,15 +161,45 @@ export default {
 		},
 	},
 	watch: {
-		// activeName: (val) => {
-		// 	console.log("val", val);
-		// },
-
-		categoryID: function () {
-			this.getData();
-			// console.log("this.product", this.product);
-			// console.log("this.total", this.total);
-		},
+		// 监听点击了哪个分类标签，通过修改分类id，响应相应的商品
+    activeName: function(val) {
+      if (val == 0) {
+        this.categoryID = [];
+      }
+      if (val > 0) {
+        this.categoryID = [Number(val)];
+      }
+      // 初始化商品总量和当前页码
+      this.total = 0;
+      this.currentPage = 1;
+      // 更新地址栏链接，方便刷新页面可以回到原来的页面
+      this.$router.push({
+        path: "/goods",
+        query: { categoryID: this.categoryID }
+      });
+    },
+    // 监听搜索条件，响应相应的商品
+    search: function(val) {
+      if (val != "") {
+        this.getProductBySearch(val);
+      }
+    },
+    // 监听分类id，响应相应的商品
+    categoryID: function() {
+      this.getData();
+      this.search = "";
+    },
+    // 监听路由变化，更新路由传递了搜索条件
+    $route: function(val) {
+      if (val.path === "/goods") {
+        if (val.query.search !== undefined) {
+          this.activeName = "-1";
+          this.currentPage = 1;
+          this.total = 0;
+          this.search = val.query.search;
+        }
+      }
+    }
 	},
 };
 </script>
@@ -183,7 +226,7 @@ export default {
 .list {
 	overflow: auto;
 	padding-top: 14.5px;
-	margin-left: 93px;
+	margin-left: 133px;
 }
 .el-pagination{
 	text-align: center;

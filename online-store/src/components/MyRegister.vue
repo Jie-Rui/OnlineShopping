@@ -23,6 +23,7 @@
             type="password"
             placeholder="请输入密码"
             v-model="RegisterUser.pass"
+            clearable
           ></el-input>
         </el-form-item>
         <el-form-item prop="confirmPass">
@@ -31,6 +32,7 @@
             type="password"
             placeholder="请再次输入密码"
             v-model="RegisterUser.confirmPass"
+            clearable
           ></el-input>
         </el-form-item>
         <el-form-item>

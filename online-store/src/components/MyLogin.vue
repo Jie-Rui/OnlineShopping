@@ -13,6 +13,7 @@
             type="password"
             placeholder="请输入密码"
             v-model="LoginUser.pass"
+            clearable
           ></el-input>
         </el-form-item>
         <el-form-item>

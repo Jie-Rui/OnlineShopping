@@ -209,7 +209,7 @@ export default {
 .main {
 	width: 1225px;
 	height: 560px;
-	margin: 0 auto;
+	margin: 10px auto;
 }
 /* 主体左侧轮播图 */
 .lbt {
@@ -266,7 +266,7 @@ img {
 	margin: 0;
 	padding: 0;
 	float: left;
-	margin: 30px 0px 10px -80px;
+	margin: 30px 0px 10px -111px;
 }
 
 /* 按钮 */
@@ -292,6 +292,9 @@ img {
 	/* margin-top: 20px; */
 	padding-top: 60px;
 	margin-left: -40px;
+}
+.policy ul {
+	margin-left: 50px;
 }
 .policy ul li {
 	float: left;

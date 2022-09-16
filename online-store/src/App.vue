@@ -58,7 +58,7 @@
           <el-menu-item index="/about">关于我们</el-menu-item>
 
           <div class="search">
-            <el-input placeholder="请输入搜索内容" v-model="search">
+            <el-input placeholder="请输入搜索内容" v-model="search" @keyup.native.enter="searchClick" clearable>
               <el-button slot="append" icon="el-icon-search" @click="searchClick"></el-button>
             </el-input>
           </div>
