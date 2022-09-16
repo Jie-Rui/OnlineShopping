@@ -59,10 +59,10 @@
 					<el-button
 						class="addCar el-icon-shopping-cart-1"
 						:disable="disable"
-						@click="addCar"
+						@click="addShoppingCart"
 						>加购物车</el-button
 					>
-					<el-button class="addCollect el-icon-star-off">
+					<el-button class="addCollect el-icon-star-off" @click="addCollect">
 						加收藏
 					</el-button>
 				</div>
@@ -86,6 +86,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
 	data() {
 		return {
@@ -110,13 +111,14 @@ export default {
 	},
 
 	methods: {
+		...mapActions(["unshiftShoppingCart", "addShoppingCartNum"]),
 		// 通过id获取商品信息
 		getProductById(id) {
 			this.$http
 				.post("/api/product/getDetails", { productID: id })
 				.then((result) => {
 					this.productInfo = result.data.Product[0];
-					console.log(result.data.Product[0]);
+					// console.log(result.data.Product[0]);
 				})
 				.catch((err) => {
 					console.log(err);
@@ -128,61 +130,73 @@ export default {
 				.post("/api/product/getDetailsPicture/", { productID: id })
 				.then((result) => {
 					this.productPic = result.data.ProductPicture;
-					console.log(result.data.ProductPicture);
+					// console.log(result.data.ProductPicture);
 				})
 				.catch((err) => {
 					console.log(err);
 				});
 		},
-		// 加购物车
-		addCar() {
-			// console.log('this.$store.getters.getUser.user_id',this.$store.getters.getUser.user_id)
-			var id = window.localStorage.user_id;
+		// 加入购物车
+		addShoppingCart() {
 			// 判断是否登录,没有登录则显示登录组件
 			if (!this.$store.getters.getUser) {
 				this.$store.dispatch("setShowLogin", true);
-				// // 弹窗
-				// const h = this.$createElement;
-				// this.$notify({
-				// 	title: "未登录",
-				// 	message: h("i", { style: "color: teal" }, "请先登录"),
-				// });
 				return;
 			}
 			this.$http
 				.post("/api/user/shoppingCart/addShoppingCart", {
-					user_id: id,
+					user_id: this.$store.getters.getUser.user_id,
 					product_id: this.productID,
 				})
 				.then((res) => {
-					// console.log(res);
-					console.log("res", res);
-					// switch (res.data.code) {
-					// 	case "001":
-					// 		// 新加入购物车成功
-					// 		this.unshiftShoppingCart(
-					// 			res.data.shoppingCartData[0]
-					// 		);
-					// 		this.notifySucceed(res.data.msg);
-					// 		break;
-					// 	case "002":
-					// 		// 该商品已经在购物车，数量+1
-					// 		this.addShoppingCartNum(this.productID);
-					// 		this.notifySucceed(res.data.msg);
-					// 		break;
-					// 	case "003":
-					// 		// 商品数量达到限购数量
-					// 		this.dis = true;
-					// 		this.notifyError(res.data.msg);
-					// 		break;
-					// 	default:
-					// 		this.notifyError(res.data.msg);
-					// }
+					switch (res.data.code) {
+						case "001":
+							// 新加入购物车成功
+							this.unshiftShoppingCart(
+								res.data.shoppingCartData[0]
+							);
+							this.notifySucceed(res.data.msg);
+							break;
+						case "002":
+							// 该商品已经在购物车，数量+1
+							this.addShoppingCartNum(this.productID);
+							this.notifySucceed(res.data.msg);
+							break;
+						case "003":
+							// 商品数量达到限购数量
+							this.dis = true;
+							this.notifyError(res.data.msg);
+							break;
+						default:
+							this.notifyError(res.data.msg);
+					}
 				})
 				.catch((err) => {
-					// return Promise.reject(err);
-					// console.log(err);
-					console.log("err", err);
+					return Promise.reject(err);
+				});
+		},
+		addCollect() {
+			// 判断是否登录,没有登录则显示登录组件
+			if (!this.$store.getters.getUser) {
+				this.$store.dispatch("setShowLogin", true);
+				return;
+			}
+			this.$http
+				.post("/api/user/collect/addCollect", {
+					user_id: this.$store.getters.getUser.user_id,
+					product_id: this.productID,
+				})
+				.then((res) => {
+					if (res.data.code == "001") {
+						// 添加收藏成功
+						this.notifySucceed(res.data.msg);
+					} else {
+						// 添加收藏失败
+						this.notifyError(res.data.msg);
+					}
+				})
+				.catch((err) => {
+					return Promise.reject(err);
 				});
 		},
 	},
