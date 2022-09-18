@@ -239,7 +239,10 @@ export default {
 	float: right;
 }
 /* 主体右侧内容间距 */
-.name , .intro, .store , .price{
+.intro, .store  , .el-card  , .button ,.policy{
+	margin: 10px auto;
+}
+.name , .price , .price-sum{
 	margin: 10px auto;
 }
 
@@ -272,7 +275,7 @@ img {
 .el-card {
 	position: relative;
 	height: 80px;
-	margin: 20px 0;
+	/* margin: 20px 0; */
 }
 
 .el-card .name {
@@ -294,7 +297,7 @@ img {
 	margin: 30px 0px 10px -111px; */
 	position: absolute;
 	left: 10px;
-	bottom: 10px;
+	bottom: 0;
 }
 
 /* 按钮 */
@@ -305,6 +308,7 @@ img {
 	color: #fff;
 	border: none;
 	text-align: center;
+
 }
 .addCar {
 	width: 340px;
