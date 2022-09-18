@@ -236,8 +236,13 @@ export default {
 .info {
 	width: 640px;
 	height: 100%;
-	float: left;
+	float: right;
 }
+/* 主体右侧内容间距 */
+.name , .intro, .store , .price{
+	margin: 10px auto;
+}
+
 /* 图片 */
 img {
 	width: 560px;
@@ -265,22 +270,31 @@ img {
 }
 /* 中部价格 */
 .el-card {
+	position: relative;
+	height: 80px;
 	margin: 20px 0;
 }
 
 .el-card .name {
-	float: left;
+	/* float: left; */
+	position: absolute;
+	left: 10px;
+	top: 0;
 }
 
 .el-card .price {
-	float: right;
+	/* float: right; */
+	position: absolute;
+	right: 10px;
+	top: 0;
 }
 
 .el-card .price-sum {
-	margin: 0;
-	padding: 0;
-	float: left;
-	margin: 30px 0px 10px -111px;
+	/* float: left;
+	margin: 30px 0px 10px -111px; */
+	position: absolute;
+	left: 10px;
+	bottom: 10px;
 }
 
 /* 按钮 */
