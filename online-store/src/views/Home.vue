@@ -222,7 +222,7 @@ export default {
 	},
 };
 </script>
-<style scoped>
+<style>
 .main-box {
   background-color: #f5f5f5;
   padding-bottom: 20px;
