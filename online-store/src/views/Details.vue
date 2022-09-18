@@ -239,8 +239,8 @@ export default {
 	float: right;
 }
 /* 主体右侧内容间距 */
-.intro, .store  , .el-card  , .button ,.policy{
-	margin: 10px auto;
+.intro, .store  , .el-card , .button ,.policy{
+	margin: 30px auto;
 }
 .name , .price , .price-sum{
 	margin: 10px auto;
