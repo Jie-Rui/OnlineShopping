@@ -1,6 +1,7 @@
 <template>
 	<div class="goods">
 		<!-- 面包屑 -->
+		<div class="breadcrumb">
 		<el-breadcrumb separator-class="el-icon-arrow-right">
 			<el-breadcrumb-item to="/">首页</el-breadcrumb-item>
 			<el-breadcrumb-item>全部商品</el-breadcrumb-item>
@@ -8,17 +9,23 @@
 			<el-breadcrumb-item v-else>分类</el-breadcrumb-item>
 			<el-breadcrumb-item v-if="search">{{ search }}</el-breadcrumb-item>
 		</el-breadcrumb>
+	</div>
 
 		<!-- 分类tab -->
 
-		<el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-			<el-tab-pane
-				v-for="item in categoryList"
-				:label="item.category_name"
-				:key="item.category_id"
-				:name="'' + item.category_id"
-			></el-tab-pane>
-		</el-tabs>
+		<div class="nav">
+      <div class="product-nav">
+        <div class="title">分类</div>
+        <el-tabs v-model="activeName" type="card">
+          <el-tab-pane
+            v-for="item in categoryList"
+            :key="item.category_id"
+            :label="item.category_name"
+            :name="''+item.category_id"
+          />
+        </el-tabs>
+      </div>
+    </div>
 
 		<div class="main">
 			<div class="list">
@@ -27,7 +34,7 @@
 					抱歉没有找到相关的商品，请看看其他的商品
 				</div>
 			</div>
-			<div>
+			<div class="pagination">
 				<el-pagination
 					background
 					layout="prev, pager, next"
@@ -180,6 +187,7 @@ export default {
     },
     // 监听搜索条件，响应相应的商品
     search: function(val) {
+			// console.log(val);
       if (val != "") {
         this.getProductBySearch(val);
       }
@@ -205,30 +213,60 @@ export default {
 </script>
 
 <style scoped>
+.goods {
+  background-color: #f5f5f5;
+}
+/* 面包屑CSS */
+.el-tabs--card .el-tabs__header {
+  border-bottom: none;
+}
+.goods .breadcrumb {
+  height: 50px;
+  background-color: white;
+}
+.goods .breadcrumb .el-breadcrumb {
+  width: 1225px;
+  line-height: 30px;
+  font-size: 16px;
+  margin: 0 auto;
+}
+/* 面包屑CSS END */
+
+/* 分类标签CSS */
+.goods .nav {
+  background-color: white;
+}
+.goods .nav .product-nav {
+  width: 1225px;
+  height: 40px;
+  line-height: 40px;
+  margin: 0 auto;
+}
+.nav .product-nav .title {
+  width: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  float: left;
+}
+/* 分类标签CSS END */
+
+/* 主要内容区CSS */
 .goods .main {
-	background-color: #f5f5f5;
+  margin: 0 auto;
+  max-width: 1225px;
 }
-.goods .el-breadcrumb {
-	height: 30px;
-	background-color: white;
-	width: 1225px;
-	line-height: 30px;
-	font-size: 16px;
-	margin: 10px auto;
+.goods .main .list {
+  min-height: 650px;
+  padding-top: 14.5px;
+  margin-left: -13.7px;
+  overflow: auto;
 }
-.el-tabs {
-	width: 1225px;
-	height: 40px;
-	line-height: 40px;
-	margin: 0 auto;
-	text-align: center;
+.goods .main .pagination {
+  height: 50px;
+  text-align: center;
 }
-.list {
-	overflow: auto;
-	padding-top: 14.5px;
-	margin-left: 133px;
-}
-.el-pagination{
-	text-align: center;
+.goods .main .none-product {
+  color: #333;
+  margin-left: 13.7px;
 }
 </style>
