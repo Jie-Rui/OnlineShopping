@@ -74,7 +74,7 @@ router.beforeResolve((to, from, next) => {
 
 // 定义全局时间过滤器
 Vue.filter('dateFormat',function (originVal){
-  const dt = new Date(originVal * 1000)
+  const dt = new Date(originVal)
 
   const y = dt.getFullYear()
   const m = (dt.getMonth() + 1 + '').padStart(2,'0')
